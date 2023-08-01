@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContosoUniversityWebApp.API", "ContosoUniversityWebApp.API\ContosoUniversityWebApp.API.csproj", "{A40C9129-C744-459A-B345-A77F792AE363}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContosoUniversityWebApp.API", "ContosoUniversityWebApp.API\ContosoUniversityWebApp.API.csproj", "{A40C9129-C744-459A-B345-A77F792AE363}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContosoUniversityWebApp.Web", "ContosoUniversityWebApp.Web\ContosoUniversityWebApp.Web.csproj", "{6366112C-F2ED-4A6B-B86F-1913F32CB1D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContosoUniversityWebApp.Web", "ContosoUniversityWebApp.Web\ContosoUniversityWebApp.Web.csproj", "{6366112C-F2ED-4A6B-B86F-1913F32CB1D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContosoUniversityWebApp.Shared", "ContosoUniversityWebApp.Shared\ContosoUniversityWebApp.Shared.csproj", "{81F8D23E-5BB2-4D2C-A9F1-34B73B65B79A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContosoUniversityWebApp.Shared", "ContosoUniversityWebApp.Shared\ContosoUniversityWebApp.Shared.csproj", "{81F8D23E-5BB2-4D2C-A9F1-34B73B65B79A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

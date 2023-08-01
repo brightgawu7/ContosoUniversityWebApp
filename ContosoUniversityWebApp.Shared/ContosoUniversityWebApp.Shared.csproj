@@ -6,8 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\ContosoUniversityWebApp.Web\ContosoUniversityWebApp.Web.csproj" />
-  </ItemGroup>
-
 </Project>
