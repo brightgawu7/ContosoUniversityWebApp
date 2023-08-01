@@ -1,4 +1,6 @@
-﻿namespace ContosoUniversityWebApp.Shared.Models;
+﻿using System.Text.Json.Serialization;
+
+namespace ContosoUniversityWebApp.Shared.Models;
 public class Course
 {
 	public int CourseID { get; set; }

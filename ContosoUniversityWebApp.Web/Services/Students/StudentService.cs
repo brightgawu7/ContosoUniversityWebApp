@@ -18,11 +18,20 @@ public class StudentService : IStudentService
 	}
 
 
-
 	public async Task GetStudents()
 	{
 		var result = await _http.GetFromJsonAsync<IEnumerable<StudentDTO>>("api/students");
 		if (result != null)
 			_studentState.Students = result;
 	}
+
+
+	public async Task<StudentDetailDTO> GetStudent(int Id)
+	{
+		var result = await _http.GetFromJsonAsync<StudentDetailDTO>($"api/students/{Id}");
+		if (result != null)
+			return result;
+		throw new Exception("Hero not found!");
+	}
+
 }

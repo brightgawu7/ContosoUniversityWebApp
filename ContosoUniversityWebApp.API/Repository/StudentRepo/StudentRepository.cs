@@ -13,9 +13,20 @@ public class StudentRepository : IStudentRepository
 		_context = context;
 	}
 
+	public async Task<Student> GetStudent(int id)
+	{
+		var student = await _context.Students
+			.Include(s => s.Enrollments)
+				.ThenInclude(e => e.Course)
+			.AsNoTracking()
+			.FirstOrDefaultAsync(m => m.ID == id);
+
+		return student;
+	}
+
 	public async Task<IEnumerable<Student>> GetStudents()
 	{
 
-		return  await _context.Students.ToListAsync();
+		return await _context.Students.ToListAsync();
 	}
 }

@@ -8,5 +8,12 @@ public class StudentAutoMapperProfile : Profile
 	public StudentAutoMapperProfile()
 	{
 		CreateMap<Student, StudentDTO>();
+
+		CreateMap<Student, StudentDetailDTO>();
+
+		CreateMap<CreateStudentDTO, Student>();
+
+		CreateMap<UpdateStudentDTO, Student>();
+
 	}
 }

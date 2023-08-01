@@ -1,15 +1,21 @@
+using System.Text.Json.Serialization;
+using ContosoUniversityWebApp.Shared.Common;
 using ContosoUniversityWebApp.API.Data;
 using ContosoUniversityWebApp.API.Repository.StudentRepo;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Net.Http.Headers;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(x =>
+				x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
+builder.Services.AddFluentValidation();
+builder.Services.AddValidatorsFromAssemblyContaining<IAssemblyMarker>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -19,6 +25,7 @@ builder.Services.AddDbContext<SchoolContext>(options =>
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+
 
 var app = builder.Build();
 

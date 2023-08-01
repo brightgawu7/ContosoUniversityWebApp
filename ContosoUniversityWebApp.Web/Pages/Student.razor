@@ -1,0 +1,45 @@
+﻿@page "/Students/Details/{Id:int}"
+@inject IStudentService studentService
+
+<dt class="col-sm-2">
+	LastName @student?.LastName
+
+</dt>
+<dd class="col-sm-10">
+	FirstMidName @student?.FirstMidName
+</dd>
+
+<dd class="col-sm-10">
+ EntrollmantDate @student?.EnrollmentDate
+</dd>
+
+<dt class="col-sm-2">
+	Enrollments
+</dt>
+<dd class="col-sm-10">
+	<table class="table">
+		<tr>
+			<th>Course Title</th>
+			<th>Grade</th>
+		</tr>
+		@if (student != null && student.Enrollments != null)
+		{
+			@foreach (var item in student.Enrollments)
+			{
+				<tr>
+					<td>
+						@item?.Course?.Title
+					</td>
+					<td>
+						@item?.Grade
+					</td>
+				</tr>
+			}
+		}
+	</table>
+</dd>
+@code {
+
+	[Parameter, EditorRequired]
+	public int Id { get; set; }
+}

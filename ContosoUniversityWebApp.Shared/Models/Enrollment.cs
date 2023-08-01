@@ -1,4 +1,6 @@
-﻿namespace ContosoUniversityWebApp.Shared.Models;
+﻿using System.Text.Json.Serialization;
+
+namespace ContosoUniversityWebApp.Shared.Models;
 
 public enum Grade
 {
@@ -12,5 +14,6 @@ public class Enrollment
 	public Grade? Grade { get; set; }
 
 	public Course? Course { get; set; }
+
 	public Student? Student { get; set; }
 }
