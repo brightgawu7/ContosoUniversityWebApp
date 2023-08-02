@@ -20,9 +20,9 @@ public class StudentService : IStudentService
 	}
 
 
-	public async Task GetStudents()
+	public async Task GetStudents(string? name = null)
 	{
-		var result = await _http.GetFromJsonAsync<IEnumerable<StudentDTO>>("api/students");
+		var result = await _http.GetFromJsonAsync<IEnumerable<StudentDTO>>($"api/students?searchName={name}");
 		if (result != null)
 			_studentState.Students = result;
 	}

@@ -28,16 +28,15 @@ public class StudentsController : ControllerBase
 
 
 	[HttpGet]
-	public async Task<ActionResult<IEnumerable<StudentDTO>>> GetStudents()
+	public async Task<ActionResult<IEnumerable<StudentDTO>>> GetStudents([FromQuery] string? SearchName, [FromQuery] string? sortOrder)
 	{
-		var allStudents = await _studentRepository.GetStudents();
+		var allStudents = await _studentRepository.GetStudents(name:SearchName, sortOrder:sortOrder);
 
-		var students = _mapper.Map<IEnumerable<StudentDTO>>(allStudents);
-		return Ok(students);
+		return Ok(allStudents);
 	}
 
 	[HttpGet("{id}")]
-	public async Task<ActionResult<Student>> GetStudent([FromRoute] int id)
+	public async Task<ActionResult<StudentDetailDTO>> GetStudent([FromRoute] int id)
 	{
 		if (id == 0)
 		{
@@ -64,6 +63,7 @@ public class StudentsController : ControllerBase
 
 		return Ok("Student Created");
 	}
+
 
 	[HttpPut("{id}")]
 	public async Task<ActionResult<StudentDTO>> UpdateStudent([FromRoute] int id, [FromBody] CreateStudentDTO data)

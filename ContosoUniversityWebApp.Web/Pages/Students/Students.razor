@@ -1,4 +1,7 @@
 ﻿@page "/Students"
+@using Blazored.FluentValidation
+@using FluentValidation;
+@using System.ComponentModel.DataAnnotations;
 
 @inject IStudentService studentService
 @inject IStudentState studentState
@@ -6,6 +9,23 @@
 <p>
 	<NavLink href="create-student">Create New</NavLink>
 </p>
+
+
+<EditForm Model="@searchTermModel" OnValidSubmit="@HandleValidSubmit">
+
+	<DataAnnotationsValidator />
+	<div class="form-actions no-color">
+		<p class="d-flex flex-row align-items-center">
+			Find by name:
+			<InputText class="w-25 form-control" @bind-Value="@searchTermModel.Name" />
+			<input type="submit" value="Search" class="btn btn-primary" /> |
+			<a class="link-primary cursor-pointer" @onclick="ResetForm">Back to full List</a>
+		</p>
+	</div>
+</EditForm>
+
+
+
 <table class="table">
 	<thead>
 		<tr>
@@ -46,3 +66,30 @@
 		}
 	</tbody>
 </table>
+
+
+@code {
+
+	SearchTerm searchTermModel = new();
+
+	private async void HandleValidSubmit()
+	{
+		await studentService.GetStudents(name: searchTermModel.Name);
+		StateHasChanged();
+	}
+
+	private async void ResetForm()
+	{
+		await studentService.GetStudents();
+		searchTermModel.Name = "";
+		StateHasChanged();
+
+	}
+
+	class SearchTerm
+	{
+		[Required]
+		public string? Name { get; set; }
+	}
+
+}
