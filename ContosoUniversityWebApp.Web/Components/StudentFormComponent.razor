@@ -1,0 +1,62 @@
+﻿@using Blazored.FluentValidation
+@using ContosoUniversityWebApp.Shared.DTOs;
+@inject IStudentService studentService
+
+<div class="row">
+	<div class="col-md-4">
+		<EditForm Model="@createStudentModel" OnValidSubmit="@HandleValidSubmit">
+
+			<FluentValidationValidator />
+			<div class="text-danger"></div>
+			<div class="form-group">
+				<label class="control-label">Last Name</label>
+				<InputText class="form-control" id="username" @bind-Value="createStudentModel.LastName" />
+				<ValidationMessage class="text-danger" For="@(()=>createStudentModel.LastName)" />
+			</div>
+			<div class="form-group">
+				<label class="control-label">First Name</label>
+				<InputText class="form-control" id="username" @bind-Value="createStudentModel.FirstMidName" />
+				<ValidationMessage class="text-danger" For="@(()=>createStudentModel.FirstMidName)" />
+			</div>
+			<div class="form-group">
+				<label class="control-label">EnrollmentDate</label>
+				<InputDate class="form-control" @bind-Value="createStudentModel.EnrollmentDate" />
+				<ValidationMessage class="text-danger" For="@(()=>createStudentModel.EnrollmentDate)" />
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary">
+
+					@(Id == 0 ? "Create" : "Edit")
+				</button>
+			</div>
+		</EditForm>
+	</div>
+</div>
+
+
+@code {
+	CreateStudentDTO createStudentModel = new();
+	[Parameter]
+	public int Id { get; set; }
+	[Parameter]
+	public CreateStudentDTO? student { get; set; }
+
+
+	protected override void OnParametersSet()
+	{
+		createStudentModel = student ?? new();
+	}
+
+	private async void HandleValidSubmit()
+	{
+		if (Id == 0)
+		{
+			Console.WriteLine("HJkabkcbabhclbacjbaljbclj");
+			await studentService.CreateStudent(createStudentModel);
+		}
+		else
+		{
+			await studentService.UpdateStudent(createStudentModel, Id);
+		}
+	}
+}

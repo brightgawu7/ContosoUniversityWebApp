@@ -12,8 +12,5 @@ public class StudentAutoMapperProfile : Profile
 		CreateMap<Student, StudentDetailDTO>();
 
 		CreateMap<CreateStudentDTO, Student>();
-
-		CreateMap<UpdateStudentDTO, Student>();
-
 	}
 }

@@ -56,14 +56,11 @@ public class StudentsController : ControllerBase
 
 
 	[HttpPost]
-	public async Task<ActionResult> CreateStudent([FromBody] CreateStudentDTO student)
+	public async Task<ActionResult> CreateStudent([FromBody] CreateStudentDTO data)
 	{
 
-		var _student = _mapper.Map<Student>(student);
 
-		_context.Add(_student);
-
-		await _context.SaveChangesAsync();
+		await _studentRepository.CreateStudent(data);
 
 		return Ok("Student Created");
 	}
@@ -71,16 +68,12 @@ public class StudentsController : ControllerBase
 	[HttpPut("{id}")]
 	public async Task<ActionResult<StudentDTO>> UpdateStudent([FromRoute] int id, [FromBody] CreateStudentDTO data)
 	{
-		var student = await _context.Students
-							.FirstOrDefaultAsync(s => s.ID == id);
 
-		if (student == null)
+		bool studentUpdated = await _studentRepository.UpdateStudent(id, data);
+
+		if (!studentUpdated)
 			return NotFound("Sorry, but no hero for you. :/");
-
-		_mapper.Map<CreateStudentDTO, Student>(data, student);
-
-		await _context.SaveChangesAsync();
-
+		
 		return Ok();
 	}
 
@@ -88,16 +81,12 @@ public class StudentsController : ControllerBase
 	[HttpDelete("{id}")]
 	public async Task<ActionResult> DeleteStudent(int id)
 	{
-		var student = await _context.Students
-		   .FirstOrDefaultAsync(sh => sh.ID == id);
+	bool studentDeleted=await  _studentRepository.DeleteSudent(id);
 
-
-		if (student == null)
+		if (!studentDeleted)
 			return NotFound("Sorry, but no hero for you. :/");
 
-		_context.Students.Remove(student);
-		await _context.SaveChangesAsync();
-
+	
 		return Ok("User Deleted");
 	}
 }

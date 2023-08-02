@@ -1,9 +1,10 @@
 ﻿@page "/Students"
+
 @inject IStudentService studentService
 @inject IStudentState studentState
 <PageTitle>Students</PageTitle>
 <p>
-	<NavLink href="Students">Create New</NavLink>
+	<NavLink href="create-student">Create New</NavLink>
 </p>
 <table class="table">
 	<thead>
@@ -36,9 +37,9 @@
 						@item.EnrollmentDate
 					</td>
 					<td>
-						<NavLink href="Students">Edit</NavLink> |
+						<NavLink href=@($"Students/Edit/{item.ID}")>Edit</NavLink> |
 						<NavLink href=@($"Students/Details/{item.ID}")>Details</NavLink> |
-						<NavLink href="Students">Delete</NavLink>
+						<NavLink href=@($"/Students/Delete/{item.ID}")>Delete</NavLink>
 					</td>
 				</tr>
 			}
